@@ -1,4 +1,3 @@
-# from IPython.display import clear_output
 import random
 
 
@@ -10,9 +9,6 @@ def display_board(board):
     print(board[4] + "|" + board[5] + "|" + board[6])
     print("-----")
     print(board[7] + "|" + board[8] + "|" + board[9])
-
-
-
 
 
 def player_input():
@@ -87,8 +83,6 @@ def player_choice(board):
             return response
 
 
-# player_choice(test_board)
-
 
 def replay():
     while True:
@@ -102,10 +96,6 @@ def replay():
 def lets_play():
     test_board = ["#", "", "", "", "", "", "", "", "", ""]
     print("Welcome to Tic Tac Toe!")
-
-    # Set the game up here
-    # display_board(test_board)
-
     player1, player2 = player_input()
     print("Player1: " + player1, "Player 2: " + player2)
     active_player = choose_first()
@@ -117,13 +107,13 @@ def lets_play():
         position_chosen = player_choice(test_board)
         # verify spot avail
         place_marker(active_player, test_board, position_chosen)
-        print(test_board)
         print(display_board(test_board))
         if win_check(test_board, active_player):
             print(active_player+" You won!")
             break
+        
         active_player = "X" if active_player == "O" else "O"
-        # need to print out who's turn per
+        print("It is your turn, " + active_player + ".")
 
     # if want to play again game:
     if replay():
