@@ -12,7 +12,7 @@ def display_board(board):
     print(board[7] + "|" + board[8] + "|" + board[9])
 
 
-test_board = ["#", "X", "O", "X", "O", "X", "O", "X", "O", ""]
+
 
 
 def player_input():
@@ -60,7 +60,7 @@ def win_check(board, mark):
 
 
 def choose_first():
-    return random.randint(1, 2)
+    return "X" if random.randint(1, 2) == 1 else "O"
 
 
 def space_check(board, position):
@@ -79,11 +79,10 @@ def full_board_check(board):
     return True
 
 
-# Not sure!
 def player_choice(board):
 
     while True:
-        response = int(input("What position do you want to play next?"))
+        response = int(input("What position do you want to play?"))
         if space_check(board, response) is False:
             return response
 
@@ -96,12 +95,41 @@ def replay():
         choice = input("Input Y or N to play again.")
         if choice == "Y":
             return True
+        else:
+            return False
 
 
-# print(replay())
-# print(full_board_check(test_board))
-# print(space_check(test_board,9))
-# print(choose_first())
-# print(win_check(test_board, 'O'))
-# place_marker('X', test_board, 8)
-# display_board(test_board)
+def lets_play():
+    test_board = ["#", "", "", "", "", "", "", "", "", ""]
+    print("Welcome to Tic Tac Toe!")
+
+    # Set the game up here
+    # display_board(test_board)
+
+    player1, player2 = player_input()
+    print("Player1: " + player1, "Player 2: " + player2)
+    active_player = choose_first()
+    print("You go first, " + active_player)
+
+    while True:
+
+        # user chooses spot
+        position_chosen = player_choice(test_board)
+        # verify spot avail
+        place_marker(active_player, test_board, position_chosen)
+        print(test_board)
+        print(display_board(test_board))
+        if win_check(test_board, active_player):
+            print(active_player+" You won!")
+            break
+        active_player = "X" if active_player == "O" else "O"
+        # need to print out who's turn per
+
+    # if want to play again game:
+    if replay():
+        lets_play()
+
+
+lets_play()
+
+
